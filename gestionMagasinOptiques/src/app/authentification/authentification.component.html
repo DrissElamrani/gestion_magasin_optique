@@ -1,0 +1,15 @@
+
+  <form class="modal-content animate" >
+     <label class="lbl_auth"><h2 *ngIf="!authStatus">Connection</h2></label>
+     <label class="lbl_decon"><h2 *ngIf= "authStatus">Déconnection</h2></label>
+    <div class="container">
+      <input [ngStyle]="{'border-color': getColorpassword()}" [hidden]="authStatus" type="text" class="form-control" [(ngModel)]="login" name="login" placeholder="Username">
+      <input [ngStyle]="{'border-color': getColorpassword()}" [hidden]="authStatus" type="password" class="form-control" [(ngModel)]="password" name="password" placeholder="Password">
+      <button class="btn btn-success" *ngIf="!authStatus" (click)="onSignIn()">Se connecter</button>
+      <button class="btn btn-danger" *ngIf="authStatus" (click)="onSignOut()">Se déconnecter</button>  
+    </div>
+    <div class="msg_erreur">
+        <label><h5>{{erreur_connexion}}</h5></label>
+   </div>
+  </form>
+
