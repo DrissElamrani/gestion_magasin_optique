@@ -1,4 +1,4 @@
-import { Component,Input, OnInit } from '@angular/core';
+import { Component,Input, OnInit, Output } from '@angular/core';
 import { Authservices } from '../services/auth.services';
 import {Router} from "@angular/router";
 
@@ -14,9 +14,9 @@ export class AuthentificationComponent implements OnInit {
   @Input() btn_active_login: boolean=false;
   @Input() btn_active_password: boolean=false;
   authStatus: boolean;
-
+  @Output() logout:boolean=false;
   constructor(private authService:Authservices, private router: Router) { }
-
+  dateNow:Date=new Date();
   ngOnInit() {
     this.authStatus = this.authService.isAuth;
   }
@@ -26,21 +26,21 @@ export class AuthentificationComponent implements OnInit {
       () => {
         if(this.login===this.authService.login && this.password===this.authService.password){
         this.authStatus = this.authService.isAuth;
+        this.logout=this.authService.isAuth;
         this.router.navigate(['']);
         }else if(this.login===''||this.password==="")
         {
-          if(this.password==="")
-          {
-          this.btn_active_password=true;
-          this.erreur_connexion='';
-          this.erreur_connexion='merci de saisie votre mot de passe';  
-          } 
+          this.erreur_connexion='merci de saisie ';
           if(this.login==='')
           {
         this.btn_active_login=true;
-        this.erreur_connexion='';
-        this.erreur_connexion='merci de saisie votre login';
+        this.erreur_connexion+='votre login';
           }
+          if(this.password==="")
+          {
+          this.btn_active_password=true;
+          this.erreur_connexion+='  password';  
+          } 
         }else
         {
           this.erreur_connexion='';
@@ -70,5 +70,13 @@ export class AuthentificationComponent implements OnInit {
     else
     return 'green';
   }
+ /* date_now = new Promise((resolve, reject) => {
+    const date= new Date();
+    setTimeout(
+      () => {
+        resolve(date);
+      }, 2000
+    );
+  });*/
   
 }

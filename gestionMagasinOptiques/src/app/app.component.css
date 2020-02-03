@@ -1,0 +1,18 @@
+@media (max-width: 700px) {
+    .container {
+      width: auto;
+    }
+}
+ .nav-link.active {
+    color:blue;
+    background-color: rgb(243, 239, 239);
+    border-radius: 6px;
+}
+ .nav-link {
+  color:white;
+}
+.d-flex
+{
+  border-radius: 16px;
+}
+
