@@ -2,6 +2,7 @@ import { Component,Input, OnInit, Output } from '@angular/core';
 import { Authservices } from '../services/auth.services';
 import {Router} from "@angular/router";
 
+
 @Component({
   selector: 'app-authentification',
   templateUrl: './authentification.component.html',
@@ -15,8 +16,8 @@ export class AuthentificationComponent implements OnInit {
   @Input() btn_active_password: boolean=false;
   authStatus: boolean;
   @Output() logout:boolean=false;
-  constructor(private authService:Authservices, private router: Router) { }
   dateNow:Date=new Date();
+  constructor(private authService:Authservices, private router: Router) { }
   ngOnInit() {
     this.authStatus = this.authService.isAuth;
   }
@@ -27,7 +28,8 @@ export class AuthentificationComponent implements OnInit {
         if(this.login===this.authService.login && this.password===this.authService.password){
         this.authStatus = this.authService.isAuth;
         this.logout=this.authService.isAuth;
-        this.router.navigate(['']);
+        
+        this.router.navigate(['client']);
         }else if(this.login===''||this.password==="")
         {
           this.erreur_connexion='merci de saisie ';
@@ -70,13 +72,5 @@ export class AuthentificationComponent implements OnInit {
     else
     return 'green';
   }
- /* date_now = new Promise((resolve, reject) => {
-    const date= new Date();
-    setTimeout(
-      () => {
-        resolve(date);
-      }, 2000
-    );
-  });*/
   
 }
