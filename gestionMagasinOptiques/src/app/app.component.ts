@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {Observable} from 'rxjs/observable';
 import 'rxjs/Rx';
 import {Router} from "@angular/router";
+import { Authservices } from './services/auth.services';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import {Router} from "@angular/router";
 })
 export class AppComponent {
   secondes :number;
-  constructor(private router: Router){}
+  constructor( private authService:Authservices,private router: Router){}
   ngOnInit(){
     const counter=Observable.interval(1000);
     counter.subscribe(
@@ -20,10 +21,12 @@ export class AppComponent {
           if(confirm('êtes-vous sûr de vouloir de rester conecter?')) 
           {
             value=0;
-            this.secondes=value;
-
+            this.secondes=value;          
           }else
-          this.router.navigate(['auth']);
+            this.authService.signOut();
+            this.router.navigate(['auth']);
+            this.secondes=0;
+            value=0;
         }else
         this.secondes=value;
         

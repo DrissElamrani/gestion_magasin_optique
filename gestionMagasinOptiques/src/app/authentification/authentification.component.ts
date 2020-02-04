@@ -1,6 +1,7 @@
 import { Component,Input, OnInit, Output } from '@angular/core';
 import { Authservices } from '../services/auth.services';
 import {Router} from "@angular/router";
+import { NgForm } from '@angular/forms';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class AuthentificationComponent implements OnInit {
     this.authStatus = this.authService.isAuth;
   }
 
-  onSignIn() {
+  onSignIn(from:NgForm) {
     this.authService.signIn().then(
       () => {
         if(this.login===this.authService.login && this.password===this.authService.password){
