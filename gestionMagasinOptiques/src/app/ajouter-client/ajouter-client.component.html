@@ -1,134 +1,91 @@
-<h2 class="text-center">Mise à jour Client</h2>
+<h2 class="text-center text-primary mb-4">Mise à jour Client</h2>
+
 <div class="container">
-<form >
-  <div class="form-row  justify-content-md-center">
-    <div class="form-group col-md-3">
-      <input type="text" class="form-control" id="inputEmail4" placeholder="Nom">
-    </div>
-    <div class="form-group col-md-3">
-      <input type="text" class="form-control" placeholder="Prénom">
-    </div>
-    <div class="form-group col-md-1">
-      <button type="submit" class="btn btn-primary">Ajouter</button>
-    </div>
-  </div>
-</form>
-</div>
-<div class="container">
-  <form>
-  <div class="form-row">
-    <div class="form-group col-md-3">
-      <input type="text" class="form-control" id="inputEmail4" placeholder="Nom">
-    </div>
-    <div class="form-group col-md-3">
-      <input type="text" class="form-control" placeholder="Prénom">
-    </div>
-    <div class="form-group col-md-4">
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <div class="input-group-text">+212</div>
-        </div>
-      <input type="number" class="form-control"  placeholder="N°:Téléphone">
+  <form [formGroup]="clientForm" (ngSubmit)="enregestrerClientTS()">
+    <div class="form-row ">
+      <div class="form-group col-md-2">
+        <input type="text" class="form-control" formControlName="idF"   placeholder="ID Client" [(ngModel)]="id" readonly>
+      </div>
+      <div class="form-group col-md-2">
+        <input type="text" class="form-control" formControlName="nameF" [(ngModel)]="name" placeholder="Nom">
+      </div>
+      <div class="form-group col-md-2">
+        <input type="text" class="form-control" formControlName="prenomF" [(ngModel)]="prenom" placeholder="Prénom">
+      </div>
+      <div class="form-group col-md-2">
+        <input type="text" class="form-control" formControlName="cinF" [(ngModel)]="cin" placeholder="CIN">
+      </div>
+      <div class="form-group col-md-2">
+        <select class="form-control"  formControlName="sexeF" [(ngModel)]="sexe">
+          <option></option>
+          <option>male</option>
+          <option>femelle</option>
+        </select>
       </div>
     </div>
-  </div>
-
-  <div class="form-row">
-    <div class="form-group col-md-5">
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <div class="input-group-text">@</div>
-        </div>
-        <input type="email" class="form-control" id="inlineFormInputGroupUsername" placeholder="Email">
+    <div class="form-row ">
+      <div class="form-group col-md-3">
+        <input type="text" class="form-control" formControlName="addresseF" [(ngModel)]="addresse" placeholder="Addresse" >
+      </div>
+      <div class="form-group col-md-2">
+        <input type="text" class="form-control" formControlName="villeF" [(ngModel)]="ville" placeholder="Ville" >
+      </div>
+      <div class="form-group col-md-3">
+        <input type="text" class="form-control" formControlName="emailF" [(ngModel)]="email" placeholder="Email">
+      </div>
+      <div class="form-group col-md-2">
+        <input type="text" class="form-control" formControlName="numeroTelF" [(ngModel)]="numeroTel" placeholder="N° Téléphone">
       </div>
     </div>
-  <div class="form-group col-md-5">
-    <input type="text" class="form-control"  placeholder="Adresse">
+    <div class="form-row ">
+      <div class="form-group col-md-2">
+        <button type="submit" class="btn btn-primary" [disabled]="!clientForm.valid"><img src="assets/save.png" height="25" width="25" alt="">Enregistrer</button>
+      </div>
   </div>
-  <div class="form-group col-md-2">
-    <input type="text" class="form-control"  placeholder="Ville">
-  </div>
+  </form>
 </div>
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <input type="text" class="form-control" >
-    </div>
-    <div class="form-group col-md-2">
-      <select id="inputState" class="form-control">
-        <option selected>Sexe</option>
-        <option>mâle</option>
-        <option>femelle</option>
-      </select>
-    </div>
-    <div class="form-group col-md-2">
-      <input type="text" class="form-control">
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="form-group col-md-1">
-  <button type="submit" class="btn btn-primary">Ajouter</button>
+<div class="border border-secondary rounded-lg mt-4 mr-2 ml-2">
+<table class="table table-striped">
+  <thead>
+    <tr >
+      <th scope="col">#</th>
+      <th scope="col">Nom</th>
+      <th scope="col">Prénom</th>
+      <th scope="col">CIN</th>
+      <th scope="col">Ville</th>
+      <th scope="col">Email</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      
+    </tr >
+  </thead >
+  <tbody>
+<tr scope="row" *ngFor="let client of clients;let i=index">
+  <td>
+    {{ client.id }}
+  </td>
+  <td >
+    {{ client.name }}
+  </td>
+  <td>
+    {{ client.prenom }}
+  </td>
+  <td>
+    {{ client.cin }}
+  </td>
+  <td>
+    {{ client.ville }}
+  </td>
+  <td>
+    {{ client.email }}
+  </td>
+  <td>
+    <img src="assets/detailsClient.png" (click)="rechercherClientByIdTS(client.id)" alt=""  width="30">
+  </td>
+  <td>
+    <img src="assets/supprimer.png" (click)="supprimerclientTS(i)" alt=""  width="30">
+  </td>
+</tr>
+</tbody>
+</table>
 </div>
-</div>
-</form>
-</div>
-
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Nom</th>
-        <th scope="col">Prénom</th>
-        <th scope="col">Email</th>
-        <th scope="col">N° Tél</th>
-        <th scope="col">Détails</th>
-        <th scope="col">supprimer</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td>0645131313</td>
-        <td><h5><a href="#" class="card-link">Détails</a></h5></td>
-        <td><input type="checkbox"></td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>jacopfat@gmail.com</td>
-        <td>0645131313</td>
-        <td><h5><a href="#" class="card-link">Détails</a></h5></td>
-        <td><input type="checkbox"></td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td>0645131313</td>
-        <td><h5><a href="#" class="card-link">Détails</a></h5></td>
-        <td><input type="checkbox"></td>
-      </tr>
-      <tr>
-        <th scope="row">4</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td>0645131314</td>
-        <td><h5><a href="#" class="card-link">Détails</a></h5></td>
-        <td><input type="checkbox"></td>
-      </tr>
-      <tr>
-        <th scope="row">5</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>jacopfat@gmail.com</td>
-        <td>0645451345</td>
-        <td><h5><a href="#" class="card-link">Détails</a></h5></td>
-        <td><input type="checkbox"></td>
-      </tr>
-    </tbody>
-  </table>

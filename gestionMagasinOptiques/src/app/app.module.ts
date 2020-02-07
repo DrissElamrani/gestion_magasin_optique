@@ -12,12 +12,14 @@ import { FournisseurComponent } from './fournisseur/fournisseur.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { FormsModule } from '@angular/forms';
 import { NotfoundpageComponent } from './notfoundpage/notfoundpage.component';
+import { ClientsSrvices } from './services/client.service';
+import {ReactiveFormsModule} from '@angular/forms'; 
 
 
 const appRoutes: Routes = [
   { path: 'auth',    component: AuthentificationComponent },
-  { path: 'client', canActivate: [AuthGuard], component:   AjouterClientComponent },
-  { path: 'menu', component: MenuComponent },
+  { path: 'client', canActivate: [AuthGuard], component: AjouterClientComponent },
+ // { path: 'menu', component: MenuComponent },
   { path: 'fournisseur',canActivate: [AuthGuard] ,component:FournisseurComponent},
   { path: '', canActivate: [AuthGuard], component:   AjouterClientComponent },
   { path: 'notfound', component: NotfoundpageComponent },
@@ -39,11 +41,13 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    ReactiveFormsModule
   ],
   providers: [
  Authservices,
- AuthGuard
+ AuthGuard,
+ ClientsSrvices
   ],
   bootstrap: [AppComponent]
 })

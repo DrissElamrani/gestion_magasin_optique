@@ -11,11 +11,16 @@ import { Authservices } from './services/auth.services';
 })
 export class AppComponent {
   secondes :number;
+  statusAuth:boolean;
   constructor( private authService:Authservices,private router: Router){}
   ngOnInit(){
-    const counter=Observable.interval(1000);
+    
+    this.statusAuth=this.authService.isAuth;
+    /*const counter=Observable.interval(10000);
     counter.subscribe(
       (value:number)=>{
+        this.statusAuth=this.authService.isAuth;
+        alert(this.statusAuth);
         if(this.secondes===10)
         {
           if(confirm('êtes-vous sûr de vouloir de rester conecter?')) 
@@ -38,7 +43,7 @@ export class AppComponent {
         console.log('observable completée');
       }
       
-    );
+    );*/
   
   }
 }

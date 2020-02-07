@@ -16,7 +16,6 @@ export class AuthentificationComponent implements OnInit {
   @Input() btn_active_login: boolean=false;
   @Input() btn_active_password: boolean=false;
   authStatus: boolean;
-  @Output() logout:boolean=false;
   dateNow:Date=new Date();
   constructor(private authService:Authservices, private router: Router) { }
   ngOnInit() {
@@ -24,33 +23,16 @@ export class AuthentificationComponent implements OnInit {
   }
 
   onSignIn(from:NgForm) {
-    this.authService.signIn().then(
-      () => {
-        if(this.login===this.authService.login && this.password===this.authService.password){
-        this.authStatus = this.authService.isAuth;
-        this.logout=this.authService.isAuth;
-        
+    const login=from.value['login'];
+    const password=from.value['password']
+    this.authStatus =this.authService.signIn(login,password)
+
+        if(this.authStatus){           
         this.router.navigate(['client']);
-        }else if(this.login===''||this.password==="")
-        {
-          this.erreur_connexion='merci de saisie ';
-          if(this.login==='')
-          {
-        this.btn_active_login=true;
-        this.erreur_connexion+='votre login';
-          }
-          if(this.password==="")
-          {
-          this.btn_active_password=true;
-          this.erreur_connexion+='  password';  
-          } 
         }else
         {
-          this.erreur_connexion='';
           this.erreur_connexion='login ou mot de passe incorrect';  
         }
-      }
-    );
   }
 
   onSignOut() {

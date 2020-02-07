@@ -7,17 +7,11 @@ export class Authservices
     login='driss';
     password='123';
 
-    signIn() {
-      return new Promise(
-        (resolve, reject) => {
-          setTimeout(
-            () => {
-              this.isAuth = true;
-              resolve(true);
-            }, 1000
-          );
-        }
-      );
+     signIn(login:string,password:string) {
+      if(this.login===login && this.password===password){
+      this.isAuth=true;
+      }
+      return this.isAuth;
     }
   
     signOut() {
