@@ -53,7 +53,10 @@ enregestrerClient(name:string,prenom:string,ville:string,email:string,sexe:strin
         numeroTel
 
     };
+    if(this.clientss.length>=1){
     clientObject.id=this.clientss[(this.clientss.length - 1)].id + 1;
+}    else {
+    clientObject.id=1;}
     clientObject.name=name;
     clientObject.prenom=prenom;
     clientObject.ville=ville;

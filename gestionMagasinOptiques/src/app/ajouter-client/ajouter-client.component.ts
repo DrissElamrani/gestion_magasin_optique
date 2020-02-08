@@ -10,6 +10,7 @@ import {Router} from "@angular/router";
 })
 export class AjouterClientComponent implements OnInit {
   clients: any[];
+  clients1: any[];
   @Input() id:number;
   @Input() name:string;
   @Input() prenom:string;
@@ -52,6 +53,8 @@ export class AjouterClientComponent implements OnInit {
     this.clientForm.reset();
     this.router.navigate(['client']);
   }
+  else
+  this.clientForm.reset();
 
   }
 rechercherClientByIdTS(idd  :number)
@@ -69,12 +72,16 @@ rechercherClientByIdTS(idd  :number)
 supprimerclientTS(i :number){
   if(confirm('êtes-vous sûr de vouloir vous supprimer ce client??')) {
   this.Clientservice.supprimerClient(i);
+  this.clientForm.reset();
   this.router.navigate(['client']);
   }
 }
 
   ngOnInit() {
-    this.clients=this.Clientservice.clientss;
+    this.clients1=this.Clientservice.clientss;
+    if(this.clients1!=null){
+    this.clients=this.clients1;
+    }
   }
 
 }
