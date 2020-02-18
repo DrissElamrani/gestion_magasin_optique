@@ -13,15 +13,16 @@ import { AuthGuard } from './services/auth-guard.service';
 import { FormsModule } from '@angular/forms';
 import { NotfoundpageComponent } from './notfoundpage/notfoundpage.component';
 import { ClientsSrvices } from './services/client.service';
-import {ReactiveFormsModule} from '@angular/forms'; 
+import {ReactiveFormsModule} from '@angular/forms';
+import { HomeComponent } from './home/home.component'; 
 
 
 const appRoutes: Routes = [
-  { path: 'auth',    component: AuthentificationComponent },
-  { path: 'client', canActivate: [AuthGuard], component: AjouterClientComponent },
- // { path: 'menu', component: MenuComponent },
-  { path: 'fournisseur',canActivate: [AuthGuard] ,component:FournisseurComponent},
-  { path: '', canActivate: [AuthGuard], component:   AjouterClientComponent },
+  { path: 'auth', component: AuthentificationComponent },
+  { path: 'clients', canActivate: [AuthGuard], component: AjouterClientComponent },
+  { path: 'fournisseurs',canActivate: [AuthGuard] ,component:FournisseurComponent},
+  { path: '',canActivate: [AuthGuard], component: HomeComponent },
+  { path: 'home', canActivate: [AuthGuard], component: HomeComponent },
   { path: 'notfound', component: NotfoundpageComponent },
   { path: '**', redirectTo: 'notfound' }
 
@@ -35,7 +36,8 @@ const appRoutes: Routes = [
     MenuComponent,
     AuthentificationComponent,
     FournisseurComponent,
-    NotfoundpageComponent
+    NotfoundpageComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -45,9 +47,9 @@ const appRoutes: Routes = [
     ReactiveFormsModule
   ],
   providers: [
- Authservices,
- AuthGuard,
- ClientsSrvices
+    Authservices,
+    AuthGuard,
+    ClientsSrvices
   ],
   bootstrap: [AppComponent]
 })

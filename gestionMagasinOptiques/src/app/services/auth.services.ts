@@ -1,20 +1,34 @@
-import { promise } from 'protractor';
-import { resolve } from 'url';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import {Router} from '@angular/router';
+
+@Injectable({
+  providedIn: 'root'
+})
 
 export class Authservices
 {
-    isAuth = false;
-    login='driss';
-    password='123';
+    private Auth = new BehaviorSubject<boolean>(false);
 
-     signIn(login:string,password:string) {
-      if(this.login===login && this.password===password){
-      this.isAuth=true;
+    private login='driss';
+    private password='123';
+
+    constructor(private router:Router){}
+
+    get isLoggedIn() {
+      return this.Auth.asObservable(); // {2}
+    }
+
+    signIn(login:string,password:string) {
+      if(this.login === login && this.password === password){
+          this.Auth.next(true);
+          this.router.navigate(['/home']);
       }
-      return this.isAuth;
+     // return this.isAuth;
     }
   
     signOut() {
-      this.isAuth = false;
+      this.Auth.next(false);
+      this.router.navigate(['/home']);
     }
 }

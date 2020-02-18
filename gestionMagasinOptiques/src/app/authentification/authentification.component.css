@@ -1,13 +1,10 @@
-.container {
+/*.container {
   text-align: center;
   box-shadow: 12px 10px 90px gray;
   margin-top:6%;
   color: blue;
-  }
-.msg_erreur
-{
-  color: red;
-}
+  }*/
+/*
 @media (min-width: 320px) {
   .container
   {
@@ -34,6 +31,12 @@
     height: auto;
     
     }
-  }
-
+  }*/
+.card{
+  margin-top: 5rem !important;
+  max-width: 60%;
+}
+.msg_erreur {
+  color: red;
+}
   
