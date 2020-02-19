@@ -1,31 +1,39 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import {ReactiveFormsModule} from '@angular/forms';
 
+
+/* Routes */
 import { AppRoutingModule } from './app-routing.module';
+import { Routes, RouterModule } from '@angular/router';
+/* */
+
+/* Components */
 import { AppComponent } from './app.component';
-import { AjouterClientComponent } from './ajouter-client/ajouter-client.component';
 import { MenuComponent } from './menu/menu.component';
 import { AuthentificationComponent } from './authentification/authentification.component';
-import { Routes, RouterModule } from '@angular/router';
-import { Authservices } from './services/auth.services';
-import { FournisseurComponent } from './fournisseur/fournisseur.component';
-import { AuthGuard } from './services/auth-guard.service';
-import { FormsModule } from '@angular/forms';
+import { HomeComponent } from './home/home.component';
+import { AjouterClientComponent } from './ajouter-client/ajouter-client.component';
+import { FournisseursComponent } from './fournisseurs/fournisseurs.component'; 
 import { NotfoundpageComponent } from './notfoundpage/notfoundpage.component';
-import { ClientsSrvices } from './services/client.service';
-import {ReactiveFormsModule} from '@angular/forms';
-import { HomeComponent } from './home/home.component'; 
+/* */
 
+/* Services */
+import { ClientsSrvices } from './services/client.service';
+import { Authservices } from './services/auth.services';
+import { AuthGuard } from './services/auth-guard.service';
+import { FournisseurService} from './services/fournisseur.service';
+/* */
 
 const appRoutes: Routes = [
   { path: 'auth', component: AuthentificationComponent },
   { path: 'clients', canActivate: [AuthGuard], component: AjouterClientComponent },
-  { path: 'fournisseurs',canActivate: [AuthGuard] ,component:FournisseurComponent},
+  { path: 'fournisseurs', canActivate: [AuthGuard],component: FournisseursComponent},
   { path: '',canActivate: [AuthGuard], component: HomeComponent },
   { path: 'home', canActivate: [AuthGuard], component: HomeComponent },
   { path: 'notfound', component: NotfoundpageComponent },
   { path: '**', redirectTo: 'notfound' }
-
 ];
 
 
@@ -35,9 +43,9 @@ const appRoutes: Routes = [
     AjouterClientComponent,
     MenuComponent,
     AuthentificationComponent,
-    FournisseurComponent,
     NotfoundpageComponent,
-    HomeComponent
+    HomeComponent,
+    FournisseursComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +57,8 @@ const appRoutes: Routes = [
   providers: [
     Authservices,
     AuthGuard,
-    ClientsSrvices
+    ClientsSrvices,
+    FournisseurService
   ],
   bootstrap: [AppComponent]
 })
