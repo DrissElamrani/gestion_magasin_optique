@@ -2,6 +2,7 @@ import { Component,Input, OnInit, Output } from '@angular/core';
 import { Authservices } from '../services/auth.services';
 import {Router} from "@angular/router";
 import { NgForm } from '@angular/forms';
+import { AppComponent } from '../app.component';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class AuthentificationComponent implements OnInit {
   @Input() btn_active_password: boolean=false;
   authStatus: boolean;
   dateNow:Date=new Date();
-  constructor(private authService:Authservices, private router: Router) { }
+  constructor(private authService:Authservices, private router: Router,private auth:AppComponent) { }
   ngOnInit() {
     this.authStatus = this.authService.isAuth;
   }
@@ -27,8 +28,9 @@ export class AuthentificationComponent implements OnInit {
     const password=from.value['password']
     this.authStatus =this.authService.signIn(login,password)
 
-        if(this.authStatus){           
-        this.router.navigate(['client']);
+        if(this.authStatus){   
+        this.auth.statusAuth=true;       
+        this.router.navigate(['client']);      
         }else
         {
           this.erreur_connexion='login ou mot de passe incorrect';  
@@ -39,6 +41,7 @@ export class AuthentificationComponent implements OnInit {
     if(confirm('êtes-vous sûr de vouloir vous déconnecter?')) {
     this.authService.signOut();
     this.authStatus = this.authService.isAuth;
+    this.auth.statusAuth=false;    
     }
   }
   getColorlogin()

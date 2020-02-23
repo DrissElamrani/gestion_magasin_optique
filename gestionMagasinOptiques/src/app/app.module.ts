@@ -14,6 +14,9 @@ import { FormsModule } from '@angular/forms';
 import { NotfoundpageComponent } from './notfoundpage/notfoundpage.component';
 import { ClientsSrvices } from './services/client.service';
 import {ReactiveFormsModule} from '@angular/forms'; 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+
 
 
 const appRoutes: Routes = [
@@ -36,18 +39,22 @@ const appRoutes: Routes = [
     AuthentificationComponent,
     FournisseurComponent,
     NotfoundpageComponent
+    
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     RouterModule.forRoot(appRoutes),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [
  Authservices,
  AuthGuard,
- ClientsSrvices
+ ClientsSrvices,
+ AppComponent
+
   ],
   bootstrap: [AppComponent]
 })

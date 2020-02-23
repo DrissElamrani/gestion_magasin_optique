@@ -101,12 +101,15 @@ rechercherClientById(id :number)
     return clientObject.id===id;
 }
 );
-
+if(client.id.valueOf()>=1){
 return client;
+}
+else 
+return null;
 } 
 supprimerClient(i :number)
 {
-        this.clientss.splice(i,1);
+  this.clientss.splice(i,1);
 }
 
 }
