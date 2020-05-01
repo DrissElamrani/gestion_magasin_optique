@@ -10,12 +10,16 @@ import { Authservices } from './services/auth.services';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  statusAuth:boolean;
-  constructor( private authService:Authservices,private router: Router){}
+
+  
+  isLoggedIn:Observable<boolean>;
+
+  constructor( private authService:Authservices){}
+  
   ngOnInit(){
-    this.statusAuth=this.authService.isAuth;
+    this.isLoggedIn = this.authService.isLoggedIn;
   }
- 
+
 }
 
 

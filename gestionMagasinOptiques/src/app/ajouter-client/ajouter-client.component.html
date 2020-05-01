@@ -1,5 +1,5 @@
 
-<h2 class="text-center text-dark mb-4">Mise à jour Client</h2>
+<h2 class="text-center text-primary mb-4">Mise à jour Client</h2>
 
 <div class="container">
   <div class="border border-secondary rounded mb-1 bg-light">
@@ -38,7 +38,7 @@
 </div>
 
 <div class="border border-secondary rounded mb-1  bg-light">
-  <form  [formGroup]="clientForm" (ngSubmit)="enregestrerClientTS()">
+  <form  [formGroup]="clientForm" (ngSubmit)="enregestreClientTs()">
         <h5 class="text-secondary">Détaills</h5>
     <div class="form-row ">
       <div class="form-group col-md-1"> 
@@ -87,10 +87,10 @@
       </div>
   </div>
   </form>
-  <div class="deux_button">
-    <button type="submit" class="btn btn-outline-primary mr-sm-2" (click)="clear()">Clear</button>
-    <button type="submit" class="btn btn-outline-primary my-2 my-sm-0" (click)="ajouterOeilLentille()">Ajouter L'oeil-lentille</button>
-  </div>
+  <!--<div class="deux_button">
+    <button type="submit" class="btn btn-outline-primary float-right" (click)="clear()">Clear</button>
+    <button type="submit" class="btn btn-outline-primary float-right" (click)="ajouterOeilLentille()">Ajouter L'oeil-lentille</button>
+  </div>-->
 </div>
 
 <div *ngIf="oeil_lentille"class="border border-secondary rounded mb-1  bg-light">
@@ -106,14 +106,20 @@
               <option>Lentille</option>
             </select>
           </div>
-          <div class="form-group col-md-3">
-            <h4>Lunette : D:{{ Prix_D }} G:{{ Prix_G }}</h4>
+          <div class="form-group col-md-1">
+            <h5>Monture :{{ totalMonture }}DH</h5>
+          </div>
+          <div class="form-group col-md-1">
+            <h5>Lunette :{{ totalLunette }}DH</h5>
+          </div>
+          <div class="form-group col-md-1">
+            <h5>Lentille :{{ totalLentille }}DH</h5>
           </div>
           <div class="form-group col-md-2">
-            <h4>Monture : {{ PrixMont }}</h4>
+            <h5>Montant HT :{{ totalMontant_HT }}DH</h5>
           </div>
-          <div class="form-group col-md-3">
-            <h4>Lentille : D:{{ Prix_L_D }} G:{{ Prix_L_G }}</h4>
+          <div class="form-group col-md-2">
+            <h5>Montant TTC :{{ totalMontant_TTC }}DH</h5>
           </div>
         </div>
   <div *ngIf="activeLunette">
@@ -192,17 +198,6 @@
         <input type="text" class="form-control" formControlName="PrixMontF" [(ngModel)]="PrixMont" placeholder="Prix">
       </div>
     </div>
-    <div class="form-row ">
-      <div class="form-group col-md-1">
-        <input type="text" class="form-control" formControlName="VersementF" [(ngModel)]="Versement" placeholder="Versement">
-      </div>
-        <div class="form-group col-md-1">
-          <input type="text" class="form-control" formControlName="PrixTotalF" [(ngModel)]="PrixTotal" placeholder="Prix Total">
-        </div>
-          <div class="form-group col-md-1">
-            <input type="text" class="form-control" formControlName="RestF" [(ngModel)]="Rest" placeholder="le rest">
-          </div>
-      </div>
   </div>
   
   <div *ngIf="activeLentille">
@@ -269,53 +264,68 @@
       <div class="form-group col-md-2">
         <button type="submit" class="btn btn-outline-primary btn-sm" [disabled]="!lentilleOeilForm.valid"><img src="assets/save.png" height="20" width="20" alt="">Enregistrer</button>
       </div>
+      <div class="form-group col-md-1"> 
+      </div>
+      <div class="form-group col-md-2"> 
+      </div>
+      <div class="form-group col-md-2">
+        <label for="email">Versement Client:</label>
+        <input type="text" class="form-control" formControlName="versementF" [(ngModel)]="versement" placeholder="Versement">
+      </div>
+      <div class="form-group col-md-1">
+        <label for="email">Le Rest:</label>
+        <input type="text" class="form-control" formControlName="restF" [(ngModel)]="rest" placeholder="Rest" readonly>
+      </div>
   </div>
   </form>
 </div>
 </div>
 
-<div class="border border-secondary rounded-lg mt-4 mr-2 ml-2  bg-light">
+
 <table class="table table-striped">
   <thead>
     <tr >
       <th scope="col">Id</th>
       <th scope="col">Nom</th>
       <th scope="col">Prénom</th>
-      <th scope="col">CIN</th>
-      <th scope="col">Ville</th>
+      <th scope="col">Tel</th>
+      <th scope="col">dateCreation</th>
       <th scope="col">Email</th>
+      <th scope="col">Adresse</th>
       <th scope="col"></th>
       <th scope="col"></th>
       
     </tr >
   </thead >
   <tbody>
-<tr scope="row" *ngFor="let client of clients;let i=index">
+<tr scope="row" *ngFor="let client of listClients;let i=index">
   <td>
-    {{ client.id }}
+    {{ client.idClt }}
   </td>
   <td >
-    {{ client.name }}
+    {{ client.nom }}
   </td>
   <td>
     {{ client.prenom }}
   </td>
   <td>
-    {{ client.cin }}
+    {{ client.telephone }}
   </td>
   <td>
-    {{ client.ville }}
+    {{ client.dateCreation }}
   </td>
   <td>
     {{ client.email }}
   </td>
   <td>
-    <img src="assets/detailsClient.png" (click)="rechercherClientByIdTS(client.id)" alt=""  width="30">
+    {{ client.addresse }}
   </td>
   <td>
-    <img src="assets/supprimer.png" (click)="supprimerclientTS(i)" alt=""  width="30">
+    <img src="assets/detailsClient.png" (click)="getClientById(client.idClt)" alt=""  width="30">
+  </td>
+  <td>
+    <img src="assets/supprimer.png" (click)="supprimerclientTS(client.idClt)" alt=""  width="30">
   </td>
 </tr>
 </tbody>
 </table>
-</div>

@@ -1,115 +1,55 @@
 
+import { Injectable } from '@angular/core'
+import { Observable, throwError } from 'rxjs';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { Client } from '../model/client';
+import { UserJournals } from '../model/UserJournals';
+import { Config } from 'protractor';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 
+import { retry, catchError } from 'rxjs/operators';
+@Injectable()
 export class ClientsSrvices {
-    clientss =[
-{
-    id:1,
-    name:'khadija',
-    prenom:'saidi',
-    ville :'rabat',
-    email :'khadija@gmail.com',
-    sexe  :'femelle',
-    cin   : 'c114584',
-    addresse:'BV hassan 2 rabat',
-    numeroTel:'0642138855'
 
-},
-{
-    id:2,
-    name:'said',
-    prenom:'alaoui',
-    ville :'fes',
-    email :'said@gmail.com',
-    sexe  :'male',
-    cin   : 'cd11554',
-    addresse:'BV chefchaouni fes',
-    numeroTel:'0645131313'
-},
-{
-    id:3,
-    name:'driss',
-    prenom:'elamrani',
-    ville :'casablanca',
-    email :'driss@gmail.com',
-    sexe  :'male',
-    cin   : 'cn11545',
-    addresse:'zerktouni Maarif casablanca',
-    numeroTel:'0665131545'
-}
-];
+    constructor(private httpclient: HttpClient) { }
 
-enregestrerClient(name:string,prenom:string,ville:string,email:string,sexe:string,cin:string,addresse:string,numeroTel:string)
-{
+    handleError(error: HttpErrorResponse) {
+        let errorMessage = 'Unknown error!';
+        if (error.error instanceof ErrorEvent) {
+            // Client-side errors
+            errorMessage = `Error: ${error.error.message}`;
+        } else {
+            // Server-side errors
+            errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+        }
+        //       window.alert(errorMessage);
+        return throwError(errorMessage);
+    }
 
-    const clientObject={
-        id:0,
-        name:'',
-        prenom:'',
-        ville :'',
-        email :'',
-        sexe  :'',
-        cin :'',
-        addresse:'',
-        numeroTel
+    getListClients(): Observable<any> {
+        return this.httpclient.get("http://localhost:8090/optique/Clients/")
+    }
+    getClientById(id: number): Observable<any> {
+        return this.httpclient.get("http://localhost:8090/optique/Clients/" + id + "/1")
+    }
+    supprimerClient(id: number): Observable<any> {
+        return this.httpclient.delete("http://localhost:8090/optique/Clients/" + id + "/1", { observe: 'response' })
+            .pipe(catchError(this.handleError));
+    }
+    ajouterClient(clt = new Client()): Observable<any> {
+        return this.httpclient.post("http://localhost:8090/optique/Clients/1", clt, { observe: 'response' })
+            .pipe(catchError(this.handleError));
+    }
 
-    };
-    if(this.clientss.length>=1){
-    clientObject.id=this.clientss[(this.clientss.length - 1)].id + 1;
-}    else {
-    clientObject.id=1;}
-    clientObject.name=name;
-    clientObject.prenom=prenom;
-    clientObject.ville=ville;
-    clientObject.email=email;
-    clientObject.sexe=sexe;
-    clientObject.cin=cin;
-    clientObject.addresse=addresse;
-    clientObject.numeroTel=numeroTel;
-    this.clientss.push(clientObject);
-    
-}
-editClient(id:number,name:string,prenom:string,ville:string,email:string,sexe:string,cin:string,addresse:string,numeroTel:string)
-{
+    modifierClient(clt = new Client(), id: number): Observable<any> {
+        return this.httpclient.put("http://localhost:8090/optique/Clients/" + id + "/1", clt, { observe: 'response' })
+            .pipe(catchError(this.handleError));
+    }
 
-    const clientObject={
-        id:0,
-        name:'',
-        prenom:'',
-        ville :'',
-        email :'',
-        sexe  :'',
-        cin :'',
-        addresse:'',
-        numeroTel
-
-    };
-    clientObject.id=this.clientss[(this.clientss.length - 1)].id + 1;
-    clientObject.name=name;
-    clientObject.prenom=prenom;
-    clientObject.ville=ville;
-    clientObject.email=email;
-    clientObject.sexe=sexe;
-    clientObject.cin=cin;
-    clientObject.addresse=addresse;
-    clientObject.numeroTel=numeroTel;
-    this.clientss.push(clientObject);
-}
-rechercherClientById(id :number)
-{
-    const client =this.clientss.find(
-    (clientObject)=>{
-    return clientObject.id===id;
-}
-);
-if(client.id.valueOf()>=1){
-return client;
-}
-else 
-return null;
-} 
-supprimerClient(i :number)
-{
-  this.clientss.splice(i,1);
-}
+    ajouterJournal(journal = new UserJournals(), idUser: number): Observable<any> {
+        return this.httpclient.post("http://localhost:8090/optique/JournalsUser/" + idUser, journal)
+            .pipe(catchError(this.handleError));
+    }
 
 }
