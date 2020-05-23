@@ -37,6 +37,7 @@ export class FournisseursComponent implements OnInit {
   createHandler(){
       let values = this.newFournisseurBuilder.value;
       let Fnr : Fournisseur = {
+         fournisseur_id : 23,
           raison_social : values.raison_social,
           adress : values.adress,
           tel : values.tel,
