@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {ReactiveFormsModule} from '@angular/forms';
 
+import {HttpClientModule} from '@angular/common/http'
 
 /* Routes */
 import { AppRoutingModule } from './app-routing.module';
@@ -17,7 +17,10 @@ import { HomeComponent } from './home/home.component';
 import { AjouterClientComponent } from './ajouter-client/ajouter-client.component';
 import { FournisseursComponent } from './fournisseurs/fournisseurs.component'; 
 import { NotfoundpageComponent } from './notfoundpage/notfoundpage.component';
-/* */
+import {ReactiveFormsModule} from '@angular/forms'; 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+
 
 /* Services */
 import { ClientsSrvices } from './services/client.service';
@@ -28,10 +31,10 @@ import { FournisseurService} from './services/fournisseur.service';
 
 const appRoutes: Routes = [
   { path: 'auth', component: AuthentificationComponent },
-  { path: 'clients', canActivate: [AuthGuard], component: AjouterClientComponent },
-  { path: 'fournisseurs', canActivate: [AuthGuard],component: FournisseursComponent},
   { path: '',canActivate: [AuthGuard], component: HomeComponent },
   { path: 'home', canActivate: [AuthGuard], component: HomeComponent },
+  { path: 'clients', canActivate: [AuthGuard], component: AjouterClientComponent },
+  { path: 'fournisseurs', canActivate: [AuthGuard],component: FournisseursComponent},
   { path: 'notfound', component: NotfoundpageComponent },
   { path: '**', redirectTo: 'notfound' }
 ];
@@ -52,7 +55,9 @@ const appRoutes: Routes = [
     FormsModule,
     AppRoutingModule,
     RouterModule.forRoot(appRoutes),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule,
+    HttpClientModule
   ],
   providers: [
     Authservices,

@@ -3,7 +3,8 @@ import { Observable } from 'rxjs';
 import { Authservices } from '../services/auth.services';
 import { Router } from "@angular/router";
 import { NgForm } from '@angular/forms';
-
+import { AppComponent } from '../app.component';
+import { User } from '../model/user';
 
 @Component({
   selector: 'app-authentification',
@@ -12,7 +13,7 @@ import { NgForm } from '@angular/forms';
 })
 
 export class AuthentificationComponent implements OnInit {
-
+  user:User;
   @Input() login: string='';
   @Input() password: string='';
   @Input() erreur_connexion: string='';
@@ -32,7 +33,29 @@ export class AuthentificationComponent implements OnInit {
   onSignIn(form:NgForm) {
     const login= form.value['login'];
     const password= form.value['password'];
-    this.authService.signIn(login,password);
+    //this.authService.signIn(login,password);
+    var statut=0;
+    this.authService.signIn(login,password).subscribe(
+     data=>{
+       console.log(data.status);
+        statut=data.status;
+       if(statut==200)
+       {
+        this.authService.isLogged();
+        this.authService.getuser(login,password).subscribe(
+          datauser=>{
+            this.user = datauser;
+            this.authService.userAuth(this.user.idUser);
+            alert(this.user.idUser);
+          }
+        );
+        
+        
+       }
+       
+     }
+
+    );
   }
 
   

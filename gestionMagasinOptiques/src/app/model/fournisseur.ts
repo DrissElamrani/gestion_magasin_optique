@@ -1,5 +1,5 @@
 export interface Fournisseur {
-    fournisseur_id: number;
+    fournisseur_id:number;
     raison_social : string;
     adress : string;
     tel: string;

@@ -5,16 +5,29 @@
       width: auto;
     }
 }
+.container {
+ display: block;
+}
  .nav-link.active {
-    color:blue;
+    color:black;
     background-color: rgb(243, 239, 239);
     border-radius: 6px;
+    font-size: x-large;
+    font-style: italic;
+    font-family: cursive;
 }
  .nav-link {
   color:white;
+  font-size: x-large;
+  font-style: italic;
+  font-family: cursive;
+  
 }
 .d-flex
 {
-  border-radius: 16px;
+  border-radius: 12px;
 }
-
+.nav-item
+{
+  color: black;
+}
