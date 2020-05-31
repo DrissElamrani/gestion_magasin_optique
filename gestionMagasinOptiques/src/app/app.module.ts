@@ -27,14 +27,18 @@ import { ClientsSrvices } from './services/client.service';
 import { Authservices } from './services/auth.services';
 import { AuthGuard } from './services/auth-guard.service';
 import { FournisseurService} from './services/fournisseur.service';
+import { SidemenuComponent } from './sidemenu/sidemenu.component';
+import { AddFournisseurComponent } from './fournisseurs/add-fournisseur/add-fournisseur.component';
 /* */
 
 const appRoutes: Routes = [
-  { path: 'auth', component: AuthentificationComponent },
-  { path: '',canActivate: [AuthGuard], component: HomeComponent },
+  { path: 'auth',component: AuthentificationComponent },
+  { path: '', canActivate: [AuthGuard], component: HomeComponent },
   { path: 'home', canActivate: [AuthGuard], component: HomeComponent },
   { path: 'clients', canActivate: [AuthGuard], component: AjouterClientComponent },
-  { path: 'fournisseurs', canActivate: [AuthGuard],component: FournisseursComponent},
+  { path: 'fournisseurs', canActivate: [AuthGuard], component: FournisseursComponent},
+  { path: 'fournisseurs/create', canActivate: [AuthGuard], component: AddFournisseurComponent},
+  { path: 'products', canActivate: [AuthGuard], component: FournisseursComponent},
   { path: 'notfound', component: NotfoundpageComponent },
   { path: '**', redirectTo: 'notfound' }
 ];
@@ -48,7 +52,9 @@ const appRoutes: Routes = [
     AuthentificationComponent,
     NotfoundpageComponent,
     HomeComponent,
-    FournisseursComponent
+    FournisseursComponent,
+    SidemenuComponent,
+    AddFournisseurComponent
   ],
   imports: [
     BrowserModule,

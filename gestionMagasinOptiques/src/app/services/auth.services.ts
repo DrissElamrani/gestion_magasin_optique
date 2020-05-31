@@ -4,62 +4,42 @@ import { Router } from '@angular/router';
 import { User } from '../model/user';
 import { HttpClientModule, HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { retry, catchError } from 'rxjs/operators';
+import { retry, catchError, map } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import {environment} from '../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 
 export class Authservices {
 
-  private Auth = new BehaviorSubject<boolean>(false);
-  private userLogged = new BehaviorSubject<Number>(0);
-  private login = 'driss';
-  private password = '123';
-
-  constructor(private router: Router, private httpclient: HttpClient) { }
-
-  get isLoggedIn() {
-    return this.Auth.asObservable(); // {2}
-  }
-  get Userlogged() {
-    return this.userLogged.asObservable(); // {2}
+  private userSubject: BehaviorSubject<User>;
+  public userLogged: Observable<User>;
+  
+  constructor(private router: Router, private httpclient: HttpClient) {
+      this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+      this.userLogged = this.userSubject.asObservable();
   }
 
-  isLogged()
-  {
-     this.Auth.next(true);
-     this.router.navigate(['/home']);
-  }
- userAuth(user:Number)
- {
-  this.userLogged.next(user);
- }
-
-  handleError(error: HttpErrorResponse) {
-    let errorMessage = 'Unknown error!';
-    if (error.error instanceof ErrorEvent) {
-      // Client-side errors
-      errorMessage = `Error: ${error.error.message}`;
-    } else {
-      // Server-side errors
-      errorMessage = ` ${error.status}`;
-    }
-    //window.alert(errorMessage);
-    return throwError(errorMessage);
+  public get currentUser(): User {
+    //console.log(this.userSubject.value);
+    return this.userSubject.value;
   }
 
-  signIn(login: string, password: string): Observable<any> {
-    return this.httpclient.get("http://localhost:8090/optique/Users/" + login + "/" + password + "",{ observe: 'response' })
-    .pipe(catchError(this.handleError));
+
+  signIn(login:string,motdepasse:string){
+    return this.httpclient.post<any>(`${environment.apiUrl}/user/auth`,{login,motdepasse})
+     .pipe(map(user=>{
+            localStorage.setItem('currentUser',JSON.stringify(user));
+            this.userSubject.next(user);
+            return user;
+     }));
   }
 
-  getuser(login: string, password: string): Observable<any> {
-    return this.httpclient.get("http://localhost:8090/optique/Users/" + login + "/" + password + "")
-    
-  }
   signOut() {
-    this.router.navigate(['/auth']);
-    this.Auth.next(false);
+    localStorage.removeItem('currentUser');
+    this.userSubject.next(null);
   }
+
 }

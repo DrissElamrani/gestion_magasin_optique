@@ -20,7 +20,7 @@ export class AjouterClientComponent implements OnInit {
   clt: Client;
   journal = new UserJournals();
   newClt = new Client();
-  userAuthID : Observable<Number>;
+  userAuthID : Number;
   clients: any[];
   clients1: any[];
   @Input() id: number;
@@ -165,8 +165,8 @@ export class AjouterClientComponent implements OnInit {
   }
   ngOnInit() {
    // this.clients = this.Clientservice.clientss;
-   this.userAuthID = this.authService.Userlogged;
-   console.log(this.userAuthID.source);
+   this.userAuthID = this.authService.currentUser.idUser;
+   console.log(this.userAuthID);
     this.getAllClients();
 
     const counter = Observable.interval(1000);
