@@ -13,10 +13,8 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
   }
 
-  signOut() {
-    if(confirm('êtes-vous sûr de vouloir vous déconnecter?')) {
-      this.auth.signOut();
-    }
+  logout() {
+     this.auth.signOut();
   }
 
 }

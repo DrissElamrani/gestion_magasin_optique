@@ -1,10 +1,12 @@
 import { Component,Input, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Authservices } from '../services/auth.services';
-import { Router } from "@angular/router";
-import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { NgForm,FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AppComponent } from '../app.component';
 import { User } from '../model/user';
+import { first } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-authentification',
@@ -13,66 +15,53 @@ import { User } from '../model/user';
 })
 
 export class AuthentificationComponent implements OnInit {
-  user:User;
-  @Input() login: string='';
-  @Input() password: string='';
-  @Input() erreur_connexion: string='';
-  @Input() btn_active_login: boolean=false;
-  @Input() btn_active_password: boolean=false;
+  user: User;
+  loginForm: FormGroup;
+  loading = false;
+  submitted = false;
+  error: any;
 
-  authStatus : Observable<boolean>;
-
-  dateNow : Date=new Date();
-
-  constructor(private authService:Authservices, private router: Router) { }
+  constructor(private authService: Authservices, private router: Router
+    ,private formBuilder: FormBuilder) 
+    {
+      // redirect to home if already logged in
+       if(this.authService.currentUser != null){
+          this.router.navigate['/home'];
+       }
+    }
 
   ngOnInit() {
-    this.authStatus = this.authService.isLoggedIn;
+          this.loginForm = this.formBuilder.group({
+            username: ['', Validators.required],
+            pass: ['', Validators.required]
+        });
   }
 
-  onSignIn(form:NgForm) {
-    const login= form.value['login'];
-    const password= form.value['password'];
-    //this.authService.signIn(login,password);
-    var statut=0;
-    this.authService.signIn(login,password).subscribe(
-     data=>{
-       console.log(data.status);
-        statut=data.status;
-       if(statut==200)
-       {
-        this.authService.isLogged();
-        this.authService.getuser(login,password).subscribe(
-          datauser=>{
-            this.user = datauser;
-            this.authService.userAuth(this.user.idUser);
-            alert(this.user.idUser);
-          }
-        );
-        
-        
-       }
-       
-     }
-
-    );
-  }
+  // convenience getter for easy access to form fields
+  get f() { return this.loginForm.controls; }
 
   
 
-  /*getColorlogin()
-  {
-    if(this.authStatus)
-    return 'green';
-    else
-    return 'red';
-  }
+  onSignIn() {
+      this.submitted = true;
 
-  getColorpassword(){
-    if(this.btn_active_password)
-    return 'red';
-    else
-    return 'green';
-  }*/
-  
+      if(this.loginForm.invalid){
+         return;
+      }
+
+      this.loading = true;
+
+      this.authService.signIn(this.f.username.value,this.f.pass.value)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.router.navigate['/home'];
+        },
+        error => {
+          this.error = error.message;
+          console.log(error);
+          this.loading = false;
+        }
+      );
+  }
 }

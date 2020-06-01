@@ -11,13 +11,20 @@ import { Authservices } from './services/auth.services';
 })
 export class AppComponent {
 
-  
-  isLoggedIn:Observable<boolean>;
+  userLogged: any;
 
-  constructor( private authService:Authservices){}
+
+  constructor( private authService:Authservices,private router:Router){
+     this.authService.userLogged.subscribe(x=>this.userLogged = x);
+  }
   
   ngOnInit(){
-    this.isLoggedIn = this.authService.isLoggedIn;
+    
+  }
+
+  logout(){
+    this.authService.signOut;
+    this.router.navigate(['/auth']);
   }
 
 }
