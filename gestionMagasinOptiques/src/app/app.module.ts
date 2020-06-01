@@ -27,8 +27,9 @@ import { ClientsSrvices } from './services/client.service';
 import { Authservices } from './services/auth.services';
 import { AuthGuard } from './services/auth-guard.service';
 import { FournisseurService} from './services/fournisseur.service';
+import {UserJournalService} from './services/userJournal.service';
 /* */
-
+//const baseUrl=window["cfgApiBaseUrl"]+"/"
 const appRoutes: Routes = [
   { path: 'auth', component: AuthentificationComponent },
   { path: '',canActivate: [AuthGuard], component: HomeComponent },
@@ -63,7 +64,8 @@ const appRoutes: Routes = [
     Authservices,
     AuthGuard,
     ClientsSrvices,
-    FournisseurService
+    FournisseurService,
+    UserJournalService
   ],
   bootstrap: [AppComponent]
 })

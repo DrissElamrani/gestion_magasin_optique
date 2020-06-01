@@ -50,12 +50,12 @@ export class Authservices {
   }
 
   signIn(login: string, password: string): Observable<any> {
-    return this.httpclient.get("http://localhost:8090/optique/Users/" + login + "/" + password + "",{ observe: 'response' })
+    return this.httpclient.get("http://localhost:8090/gestionMagasinOptique/optique/Users/" + login + "/" + password + "",{ observe: 'response' })
     .pipe(catchError(this.handleError));
   }
 
   getuser(login: string, password: string): Observable<any> {
-    return this.httpclient.get("http://localhost:8090/optique/Users/" + login + "/" + password + "")
+    return this.httpclient.get("http://localhost:8090/gestionMagasinOptique/optique/Users/" + login + "/" + password + "")
     
   }
   signOut() {

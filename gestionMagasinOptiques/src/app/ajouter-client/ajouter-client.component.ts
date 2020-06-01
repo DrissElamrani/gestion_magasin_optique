@@ -10,6 +10,7 @@ import { Client } from '../model/client';
 import { UserJournals } from '../model/UserJournals';
 import { User } from '../model/user';
 import { Authservices } from '../services/auth.services';
+import {UserJournalService} from '../services/userJournal.service';
 @Component({
   selector: 'app-ajouter-client',
   templateUrl: './ajouter-client.component.html',
@@ -49,7 +50,7 @@ export class AjouterClientComponent implements OnInit {
   versement: number = 0;
   rest: number;
   counterSubscription: Subscription;
-  constructor(private fb: FormBuilder, private Clientservice: ClientsSrvices, private router: Router,private authService:Authservices) { }
+  constructor(private fb: FormBuilder, private Clientservice: ClientsSrvices, private router: Router,private authService:Authservices,private UserJournalService:UserJournalService) { }
   clientForm = this.fb.group({
     idF: [''], nameF: ['', Validators.required], prenomF: ['', Validators.required], villeF: [''],
     emailF: ['', [Validators.required, Validators.email]], sexeF: [''], cinF: [''], addresseF: [''],
@@ -115,7 +116,7 @@ export class AjouterClientComponent implements OnInit {
   }
 
   ajouterJournal(j: UserJournals, id) {
-    this.Clientservice.ajouterJournal(j, id).subscribe(
+    this.UserJournalService.ajouterJournal(j, id).subscribe(
       data => {
         console.log(data);
       }
