@@ -28,17 +28,6 @@ export class Authservices {
   }
 
 
-<<<<<<< HEAD
-  signIn(login: string, password: string): Observable<any> {
-    return this.httpclient.get("http://localhost:8090/gestionMagasinOptique/optique/Users/" + login + "/" + password + "",{ observe: 'response' })
-    .pipe(catchError(this.handleError));
-  }
-
-  getuser(login: string, password: string): Observable<any> {
-    return this.httpclient.get("http://localhost:8090/gestionMagasinOptique/optique/Users/" + login + "/" + password + "")
-    
-  }
-=======
   signIn(login:string,motdepasse:string){
     return this.httpclient.post<any>(`${environment.apiUrl}/user/auth`,{login,motdepasse})
      .pipe(map(user=>{
@@ -48,7 +37,6 @@ export class Authservices {
      }));
   }
 
->>>>>>> 9785a216e3aee4a3f4244c6124964486a8a7eed1
   signOut() {
     localStorage.removeItem('currentUser');
     this.userSubject.next(null);

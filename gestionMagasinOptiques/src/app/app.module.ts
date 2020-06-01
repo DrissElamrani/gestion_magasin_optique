@@ -27,12 +27,9 @@ import { ClientsSrvices } from './services/client.service';
 import { Authservices } from './services/auth.services';
 import { AuthGuard } from './services/auth-guard.service';
 import { FournisseurService} from './services/fournisseur.service';
-<<<<<<< HEAD
-import {UserJournalService} from './services/userJournal.service';
-=======
 import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { AddFournisseurComponent } from './fournisseurs/add-fournisseur/add-fournisseur.component';
->>>>>>> 9785a216e3aee4a3f4244c6124964486a8a7eed1
+import {UserJournalService} from './services/userJournal.service';
 /* */
 //const baseUrl=window["cfgApiBaseUrl"]+"/"
 const appRoutes: Routes = [
