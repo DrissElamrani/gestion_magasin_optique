@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl:'http://localhost:8090/optique'
+  apiUrl:'http://localhost:8090/gestionMagasinOptique/optique'
 };
 
 /*
