@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ɵConsole } from '@angular/core';
-import { ClientsSrvices } from '../services/client.service';
+import { ClientService } from '../services/client.service';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { Router } from "@angular/router";
@@ -50,7 +50,7 @@ export class AjouterClientComponent implements OnInit {
   versement: number = 0;
   rest: number;
   counterSubscription: Subscription;
-  constructor(private fb: FormBuilder, private Clientservice: ClientsSrvices, private router: Router,private authService:Authservices,private UserJournalService:UserJournalService) { }
+  constructor(private fb: FormBuilder, private Clientservice: ClientService, private router: Router,private authService:Authservices,private UserJournalService:UserJournalService) { }
   clientForm = this.fb.group({
     idF: [''], nameF: ['', Validators.required], prenomF: ['', Validators.required], villeF: [''],
     emailF: ['', [Validators.required, Validators.email]], sexeF: [''], cinF: [''], addresseF: [''],

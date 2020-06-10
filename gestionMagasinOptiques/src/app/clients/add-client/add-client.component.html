@@ -1,0 +1,115 @@
+<div class="row justify-content-center">
+    <div class="col-sm-12 mt-4">
+      <div class="card">
+        <div class="card-body">
+          <h6 class="card-title mb-3"> <i class="fas fa-pen-square"></i> &nbsp; Nouveau Client</h6>
+
+          
+          <form [formGroup]="newClientBuilder" (ngSubmit)="createHandler()">
+            
+              <div class="form-group row justify-content-center">
+                <label class="col-sm-2 col-form-label" for="nom">
+                    Nom
+                </label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="nom" formControlName="nom">
+                    <small class="text-danger" *ngIf="field('nom').touched && field('nom').invalid"> Nom est obligatoire</small>
+               </div>
+              </div>
+
+              <div class="form-group row justify-content-center">
+                <label class="col-sm-2 col-form-label" for="prenom">
+                    Prenom
+                </label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="prenom" formControlName="prenom">
+                    <small class="text-danger" *ngIf="field('prenom').touched && field('prenom').invalid"> Prenom est obligatoire</small>
+               </div>
+              </div>
+
+              <div class="form-group row justify-content-center">
+                <label class="col-sm-2 col-form-label" for="numero">
+                    Cin
+                </label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="numero" formControlName="numero">
+                    <small class="text-danger" *ngIf="field('numero').touched && field('numero').invalid"> CIN obligatoire</small>
+               </div>
+              </div>
+
+              <div class="form-group row justify-content-center">
+                <label class="col-sm-2 col-form-label" for="telephone">
+                    Téléphone
+                </label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="telephone" formControlName="telephone">
+                     <small class="text-danger" *ngIf="field('telephone').touched && field('telephone').invalid">Numéro de téléphone invalid</small>
+                </div>
+               
+              </div>
+
+            
+              <div class="form-group row justify-content-center">
+                <label class="col-sm-2 col-form-label" for="email">
+                    Email
+                </label>
+                <div class="col-sm-8">
+                    <input type="email" class="form-control" id="email" formControlName="email">
+                 <small class="text-danger"   *ngIf="field('email').touched && field('email').invalid">Email invalid</small>
+                </div>
+               
+              </div>
+
+              <div class="form-group row justify-content-center">
+                <label class="col-sm-2 col-form-label" for="mutuelle">
+                    N° Mutuelle
+                </label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="mutuelle" formControlName="mutuelle">
+                    <small class="text-danger" *ngIf="field('mutuelle').touched && field('mutuelle').invalid">N° Mutuelle invalid</small>
+
+                </div>
+               
+              </div>
+
+
+              <div class="form-group row justify-content-center">
+                <label class="col-sm-2 col-form-label" for="addresse">
+                    Adresse
+                </label>
+                <div class="col-sm-8">
+                    <textarea class="form-control" id="addresse" formControlName="addresse"></textarea>
+                 <small class="text-danger" *ngIf="field('addresse').touched && field('addresse').invalid">Adresse trop longue</small>  
+                </div>
+               
+              </div>
+
+              <div class="form-group row justify-content-center">
+                <label class="col-sm-2 col-form-label" for="remarque">
+                    Remarque
+                </label>
+                <div class="col-sm-8">
+                    <textarea class="form-control" id="remarque" formControlName="remarque"></textarea>
+                 <small class="text-danger" *ngIf="field('remarque').touched && field('remarque').invalid">Remarque trop longue</small>  
+                </div>
+               
+              </div>
+
+              <div class="form-group row justify-content-center">
+                  <div class="col-sm-10">
+                      <a role="button" routerLink='/clients' class="btn btn-secondary float-left" >Retour</a>
+
+                    <button class="btn btn-success float-right" [disabled]="newClientBuilder.invalid">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        Créer
+                    </button>
+                  </div>
+                
+            </div>
+
+             
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

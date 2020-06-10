@@ -23,20 +23,23 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 /* Services */
-import { ClientsSrvices } from './services/client.service';
+import { ClientService } from './services/client.service';
 import { Authservices } from './services/auth.services';
 import { AuthGuard } from './services/auth-guard.service';
 import { FournisseurService} from './services/fournisseur.service';
 import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { AddFournisseurComponent } from './fournisseurs/add-fournisseur/add-fournisseur.component';
 import {UserJournalService} from './services/userJournal.service';
+import { ClientsComponent } from './clients/clients.component';
+import { AddClientComponent } from './clients/add-client/add-client.component';
 /* */
 //const baseUrl=window["cfgApiBaseUrl"]+"/"
 const appRoutes: Routes = [
   { path: 'auth',component: AuthentificationComponent },
   { path: '', canActivate: [AuthGuard], component: HomeComponent },
   { path: 'home', canActivate: [AuthGuard], component: HomeComponent },
-  { path: 'clients', canActivate: [AuthGuard], component: AjouterClientComponent },
+  { path: 'clients', canActivate: [AuthGuard], component: ClientsComponent },
+  { path: 'clients/create', canActivate: [AuthGuard], component: AddClientComponent },
   { path: 'fournisseurs', canActivate: [AuthGuard], component: FournisseursComponent},
   { path: 'fournisseurs/create', canActivate: [AuthGuard], component: AddFournisseurComponent},
   { path: 'products', canActivate: [AuthGuard], component: FournisseursComponent},
@@ -55,7 +58,9 @@ const appRoutes: Routes = [
     HomeComponent,
     FournisseursComponent,
     SidemenuComponent,
-    AddFournisseurComponent
+    AddFournisseurComponent,
+    ClientsComponent,
+    AddClientComponent
   ],
   imports: [
     BrowserModule,
@@ -64,12 +69,13 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     ReactiveFormsModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    
   ],
   providers: [
     Authservices,
     AuthGuard,
-    ClientsSrvices,
+    ClientService,
     FournisseurService,
     UserJournalService
   ],

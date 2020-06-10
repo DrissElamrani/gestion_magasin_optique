@@ -7,10 +7,11 @@ import { UserJournals } from '../model/UserJournals';
 import { Config } from 'protractor';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
+import {environment} from '../../environments/environment';
 
 import { retry, catchError } from 'rxjs/operators';
 @Injectable()
-export class ClientsSrvices {
+export class ClientService {
 
     constructor(private httpclient: HttpClient) { }
 
@@ -27,9 +28,10 @@ export class ClientsSrvices {
         return throwError(errorMessage);
     }
 
-    getListClients(): Observable<any> {
-        return this.httpclient.get("http://localhost:8090/gestionMagasinOptique/optique/Clients/")
+    getClients(): Observable<any> {
+        return this.httpclient.get(`${environment.apiUrl}/clients/list`);
     }
+
     getClientById(id: number): Observable<any> {
         return this.httpclient.get("http://localhost:8090/gestionMagasinOptique/optique/Clients/" + id + "/1")
     }
@@ -37,9 +39,10 @@ export class ClientsSrvices {
         return this.httpclient.delete("http://localhost:8090/gestionMagasinOptique/optique/Clients/" + id + "/1", { observe: 'response' })
             .pipe(catchError(this.handleError));
     }
-    ajouterClient(clt = new Client()): Observable<any> {
-        return this.httpclient.post("http://localhost:8090/gestionMagasinOptique/optique/Clients/1", clt, { observe: 'response' })
-            .pipe(catchError(this.handleError));
+
+    addClient(client: Client): Observable<any> 
+    {
+        return this.httpclient.post(`${environment.apiUrl}/clients/create`, client);
     }
 
     modifierClient(clt = new Client(), id: number): Observable<any> {
