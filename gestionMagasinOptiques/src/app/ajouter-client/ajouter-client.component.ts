@@ -17,7 +17,11 @@ import {UserJournalService} from '../services/userJournal.service';
   styleUrls: ['./ajouter-client.component.css']
 })
 export class AjouterClientComponent implements OnInit {
-  listClients: Client[];
+
+  ngOnInit() {
+
+  }
+  /*listClients: Client[];
   clt: Client;
   journal = new UserJournals();
   newClt = new Client();
@@ -207,6 +211,6 @@ export class AjouterClientComponent implements OnInit {
       this.activeLunette = false;
       this.activeLentille = true;
     }
-  }
+  }*/
 
 }
