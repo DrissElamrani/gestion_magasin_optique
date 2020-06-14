@@ -21,6 +21,7 @@
                       <th scope="col">E-mail</th>
                       <th scope="col">ICE</th>
                       <th scope="col">Adresse</th>
+                      <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -31,6 +32,12 @@
                         <td>{{fr.email}}</td>
                         <td>{{fr.ice}}</td>
                         <td>{{fr.adress}}</td>
+                        <td>
+                          <div class="btn-group btn-group-sm" role="group" >
+                            <button type="button" class="btn btn-secondary"><i class="fas fa-pen"></i> Modifier</button>
+                            <button type="button"  class="btn btn-danger"><i class="far fa-trash-alt"></i> Supprimer</button>
+                          </div>           
+                        </td>
                     </tr>
                   </tbody>
                 </table>

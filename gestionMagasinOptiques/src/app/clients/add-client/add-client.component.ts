@@ -13,7 +13,7 @@ export class AddClientComponent implements OnInit {
 
   loading = false;
 
-  constructor(private clientService: ClientService,private formBuilder:FormBuilder,) { }
+  constructor(private clientService: ClientService,private formBuilder:FormBuilder) { }
 
   newClientBuilder : FormGroup = this.formBuilder.group({
     nom: ['',[Validators.required]],
@@ -57,6 +57,7 @@ export class AddClientComponent implements OnInit {
       },
       error => {
         console.log(error);
+        this.loading = false;
       },
       () => {
         this.loading = false;

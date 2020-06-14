@@ -14,7 +14,6 @@ import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
 import { AuthentificationComponent } from './authentification/authentification.component';
 import { HomeComponent } from './home/home.component';
-import { AjouterClientComponent } from './ajouter-client/ajouter-client.component';
 import { FournisseursComponent } from './fournisseurs/fournisseurs.component'; 
 import { NotfoundpageComponent } from './notfoundpage/notfoundpage.component';
 import {ReactiveFormsModule} from '@angular/forms'; 
@@ -32,6 +31,9 @@ import { AddFournisseurComponent } from './fournisseurs/add-fournisseur/add-four
 import {UserJournalService} from './services/userJournal.service';
 import { ClientsComponent } from './clients/clients.component';
 import { AddClientComponent } from './clients/add-client/add-client.component';
+import { ClientDetailComponent } from './clients/client-detail/client-detail.component';
+import { UsersComponent } from './users/users.component';
+import { ProductsComponent } from './products/products.component';
 /* */
 //const baseUrl=window["cfgApiBaseUrl"]+"/"
 const appRoutes: Routes = [
@@ -40,9 +42,11 @@ const appRoutes: Routes = [
   { path: 'home', canActivate: [AuthGuard], component: HomeComponent },
   { path: 'clients', canActivate: [AuthGuard], component: ClientsComponent },
   { path: 'clients/create', canActivate: [AuthGuard], component: AddClientComponent },
+  { path: 'client/:id', canActivate: [AuthGuard], component: ClientDetailComponent },
   { path: 'fournisseurs', canActivate: [AuthGuard], component: FournisseursComponent},
   { path: 'fournisseurs/create', canActivate: [AuthGuard], component: AddFournisseurComponent},
-  { path: 'products', canActivate: [AuthGuard], component: FournisseursComponent},
+  { path: 'products', canActivate: [AuthGuard], component: ProductsComponent},
+  { path: 'users', canActivate: [AuthGuard], component: UsersComponent},
   { path: 'notfound', component: NotfoundpageComponent },
   { path: '**', redirectTo: 'notfound' }
 ];
@@ -51,7 +55,6 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    AjouterClientComponent,
     MenuComponent,
     AuthentificationComponent,
     NotfoundpageComponent,
@@ -60,7 +63,10 @@ const appRoutes: Routes = [
     SidemenuComponent,
     AddFournisseurComponent,
     ClientsComponent,
-    AddClientComponent
+    AddClientComponent,
+    ClientDetailComponent,
+    UsersComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule,

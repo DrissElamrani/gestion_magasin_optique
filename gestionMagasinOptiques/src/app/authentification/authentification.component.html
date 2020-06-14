@@ -1,46 +1,38 @@
-  <div class="d-flex justify-content-center">
-    <div class="col-sm-6">
-      <div class="card">
-        <div class="card-body">
-          <div class="msg_erreur">
-            <label>
-              <h5>{{error}}</h5>
-            </label>
-          </div>
-          <img class="mb-4" src="assets/tof_login.png" alt="" width="120" height="120">
-          <form [formGroup]="loginForm" (ngSubmit)="onSignIn()">
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1"></span>
-              </div>
-              <input class="form-control" type="text" formControlName="username"
-               placeholder="Login" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
-            
-              <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                <div *ngIf="f.username.errors.required">Login obligatoire</div>
-              </div>
-            </div>
+<form class="form-signin" [formGroup]="loginForm" (ngSubmit)="onSignIn()">
+  <div *ngIf="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Oops!</strong> {{error}}
+  </div>
 
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">Mot de passe</span>
-                </div>
-                <input class="form-control" type="password" formControlName="pass"
-                 placeholder="Password" [ngClass]="{ 'is-invalid': submitted && f.pass.errors }">
+  <div class="text-center mb-4">
+    <h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
+    <p>Pour continuer, connectez-vous à votre compte</p>
+  </div>
 
-                 <div *ngIf="submitted && f.pass.errors" class="invalid-feedback">
-                  <div *ngIf="f.pass.errors.required">Mot de passe obligatoire</div>
-                </div>
-
-              </div>
-
-             <button [disabled]="loading" class="btn btn-primary">
-              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-               Se connecter
-              </button>
-          </form> 
-        </div>
-      </div>
+  <div class="form-label-group">
+    <input type="text" id="inputEmail" class="form-control" formControlName="username" placeholder="Login" [ngClass]="{'is-invalid': submitted && f.username.errors }">
+    <label for="inputEmail">Login</label>
+    <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+     Login obligatoire
     </div>
+  </div>
 
+  <div class="form-label-group">
+    <input type="password" id="inputPassword" class="form-control" placeholder="Password" formControlName="pass"
+    placeholder="Password" [ngClass]="{ 'is-invalid': submitted && f.pass.errors }" >
+    <label for="inputPassword">Password</label>
+    <div *ngIf="submitted && f.pass.errors" class="invalid-feedback">
+      Mot de passe obligatoire
+    </div>
+  </div>
 
+  <div class="checkbox mb-3">
+    <label>
+      <input type="checkbox" value="remember-me"> Garder ma session active
+    </label>
+  </div>
+  <button [disabled]="loginForm.invalid" class="btn btn-lg btn-primary btn-block" type="submit">
+    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+    Se connecter
+  </button>
+  <p class="mt-5 mb-3 text-muted text-center">&copy; 2020</p>
+</form>

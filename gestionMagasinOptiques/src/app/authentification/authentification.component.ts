@@ -57,9 +57,11 @@ export class AuthentificationComponent implements OnInit {
         data => {
           this.router.navigate(['/home']);
         },
-        error => {
-          this.error = error.message;
-          console.log(error);
+        err => {
+          if(err.status == 404) this.error = "Login ou mot de passe invalide";
+          else this.error = "something went wrong please try again";
+  
+          console.log(err);
           this.loading = false;
         }
       );

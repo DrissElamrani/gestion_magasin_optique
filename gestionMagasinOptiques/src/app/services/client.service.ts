@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core'
 import { Observable, throwError } from 'rxjs';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HttpHeaders } from '@angular/common/http';
 import { Client } from '../model/client';
 import { UserJournals } from '../model/UserJournals';
 import { Config } from 'protractor';
@@ -10,10 +10,18 @@ import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import {environment} from '../../environments/environment';
 
 import { retry, catchError } from 'rxjs/operators';
+import { User } from '../model/user';
 @Injectable()
 export class ClientService {
 
     constructor(private httpclient: HttpClient) { }
+
+    private httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/json',
+          'Access-Control-Allow-Origin':'*',
+        })
+    };
 
     handleError(error: HttpErrorResponse) {
         let errorMessage = 'Unknown error!';
@@ -33,21 +41,20 @@ export class ClientService {
     }
 
     getClientById(id: number): Observable<any> {
-        return this.httpclient.get("http://localhost:8090/gestionMagasinOptique/optique/Clients/" + id + "/1")
+        return this.httpclient.get(`${environment.apiUrl}/clients/${id}`,this.httpOptions)
     }
+
     supprimerClient(id: number): Observable<any> {
-        return this.httpclient.delete("http://localhost:8090/gestionMagasinOptique/optique/Clients/" + id + "/1", { observe: 'response' })
-            .pipe(catchError(this.handleError));
+        return this.httpclient.delete(`${environment.apiUrl}/clients/${id}/delete`,this.httpOptions);
     }
 
     addClient(client: Client): Observable<any> 
     {
-        return this.httpclient.post(`${environment.apiUrl}/clients/create`, client);
+        return this.httpclient.post(`${environment.apiUrl}/clients/create`, client,this.httpOptions);
     }
 
-    modifierClient(clt = new Client(), id: number): Observable<any> {
-        return this.httpclient.put("http://localhost:8090/gestionMagasinOptique/optique/Clients/" + id + "/1", clt, { observe: 'response' })
-            .pipe(catchError(this.handleError));
+    modifierClient(clt : Client, id: number): Observable<any> {
+        return this.httpclient.put(`${environment.apiUrl}/clients/${id}/update`, clt,this.httpOptions);
     }
 
     ajouterJournal(journal = new UserJournals(), idUser: number): Observable<any> {

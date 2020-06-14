@@ -1,5 +1,7 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Clients</h1>
+    <h1 class="h2">
+      Clients
+    </h1>
     <div class="btn-toolbar mb-2 mb-md-0">
         <a class="btn btn-sm btn-primary" routerLink="/clients/create" role="button">
           <i class="fas fa-plus"></i> &nbsp;
@@ -22,6 +24,7 @@
                         <th scope="col">Ville</th>
                         <th scope="col">E-mail</th>
                         <th scope="col">Téléphone</th>
+                        <th>Actions</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -33,6 +36,12 @@
                           <td>-</td>
                           <td>{{cl.email}}</td>
                           <td>{{cl.telephone}}</td>
+                          <td>
+                            <div class="btn-group btn-group-sm" role="group" >
+                              <button type="button" (click)="editUser(cl.idClt)" class="btn btn-secondary"><i class="fas fa-pen"></i> Modifier</button>
+                              <button type="button" (click)="deleteUser(cl.idClt)" class="btn btn-danger"><i class="far fa-trash-alt"></i> Supprimer</button>
+                            </div>           
+                          </td>
                       </tr>
                     </tbody>
                   </table>
