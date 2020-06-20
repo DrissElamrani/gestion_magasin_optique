@@ -49,7 +49,7 @@ export class ClientsComponent implements OnInit {
             this.getClients();
             Swal.fire(
               'Good job!',
-              'Nouveau client à été bien enregistré',
+              'Client à été bien supprimé',
               'success'
             );
           },

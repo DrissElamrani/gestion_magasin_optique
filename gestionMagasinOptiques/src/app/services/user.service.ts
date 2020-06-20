@@ -33,5 +33,9 @@ export class UserService {
 
     modifierUser(user : User, id: number): Observable<any> {
       return this.httpclient.put(`${environment.apiUrl}/Users/${id}`, user,this.httpOptions);
+    }
+
+    supprimerUser(id: number): Observable<any> {
+      return this.httpclient.delete(`${environment.apiUrl}/Users/${id}`,this.httpOptions);
   }
 }
