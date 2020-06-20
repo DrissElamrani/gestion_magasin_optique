@@ -1,6 +1,4 @@
 export interface User {
-
-    idUser:Number;
     nom: String;
     prenom: String;
     tel: String;

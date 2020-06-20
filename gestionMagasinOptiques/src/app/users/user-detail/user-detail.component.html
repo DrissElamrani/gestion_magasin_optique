@@ -1,0 +1,137 @@
+<div class="row justify-content-center">
+
+    <div class="col-sm-12 col-md-6 mt-4">
+      <div class="card">
+        <div class="card-body">
+          <h6 class="card-title mb-3"> <i class="fas fa-pen-square"></i> &nbsp; Client #{{field('idUser').value}}</h6>
+
+          
+          <form [formGroup]="editUserBuilder" (ngSubmit)="editHandler()">
+            
+            <div class="form-group row justify-content-center">
+              <label class="col-sm-3 col-form-label" for="nom">
+                  Nom
+              </label>
+              <div class="col-sm-7">
+                  <input type="text" class="form-control" id="nom" formControlName="nom" [ngClass]="{ 'is-invalid':field('nom').touched && field('nom').invalid}">
+                  <div class="invalid-feedback" *ngIf="field('nom').touched && field('nom').invalid"> Nom est obligatoire</div>
+             </div>
+            </div>
+
+            <div class="form-group row justify-content-center">
+              <label class="col-sm-3 col-form-label" for="prenom">
+                  Prenom
+              </label>
+              <div class="col-sm-7">
+                  <input type="text" class="form-control" id="prenom" formControlName="prenom" [ngClass]="{ 'is-invalid':field('prenom').touched && field('prenom').invalid}">
+                  <div class="invalid-feedback" *ngIf="field('prenom').touched && field('prenom').invalid"> Prenom est obligatoire</div>
+             </div>
+            </div>
+
+            <div class="form-group row justify-content-center">
+              <label class="col-sm-3 col-form-label" for="login">
+                  Login
+              </label>
+              <div class="col-sm-7">
+                  <input type="text" class="form-control" id="login" formControlName="login" [ngClass]="{ 'is-invalid':field('login').touched && field('login').invalid}">
+                  <div class="invalid-feedback" *ngIf="field('login').touched && field('login').invalid"> Login obligatoire</div>
+             </div>
+            </div>
+
+            <div class="form-group row justify-content-center">
+              <label class="col-sm-3 col-form-label" for="password">
+                  Mot de passe
+              </label>
+              <div class="col-sm-7">
+                <div class="input-group mb-3">
+                  <input [type]="fieldTextType ? 'text' : 'password'" class="form-control" id="password" formControlName="motdepasse" [ngClass]="{ 'is-invalid':field('motdepasse').touched && field('motdepasse').invalid}">
+                  <div class="input-group-append">
+                    <button  (click)="toggleFieldTextType()" class="btn btn-outline-secondary" type="button" id="button-addon2">
+                      <i class="fa" [ngClass]="{' fa-eye-slash': !fieldTextType, ' fa-eye': fieldTextType}"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            
+
+            <div class="form-group row justify-content-center">
+              <label class="col-sm-3 col-form-label" for="telephone">
+                  Téléphone
+              </label>
+              <div class="col-sm-7">
+                  <input type="text" class="form-control" id="telephone" formControlName="tel" [ngClass]="{ 'is-invalid':field('tel').touched && field('tel').invalid}">
+                   <div class="invalid-feedback" *ngIf="field('tel').touched && field('tel').invalid">Numéro de téléphone invalid</div>
+              </div>
+             
+            </div>
+
+          
+            <div class="form-group row justify-content-center">
+              <label class="col-sm-3 col-form-label" for="email">
+                  Email
+              </label>
+              <div class="col-sm-7">
+                  <input type="email" class="form-control" id="email" formControlName="email" [ngClass]="{ 'is-invalid':field('email').invalid}">
+               <div class="invalid-feedback"   *ngIf="field('email').touched && field('email').invalid">Email invalid</div>
+              </div>
+             
+            </div>
+
+            
+
+
+            <div class="form-group row justify-content-center">
+              <label class="col-sm-3 col-form-label" for="addresse">
+                  Adresse
+              </label>
+              <div class="col-sm-7">
+                  <textarea class="form-control" id="addresse" formControlName="addresse" [ngClass]="{ 'is-invalid':field('addresse').invalid}"></textarea>
+               <div class="invalid-feedback" *ngIf="field('addresse').touched && field('addresse').invalid">Adresse trop longue</div>  
+              </div>
+             
+            </div>
+
+
+            <div class="form-group row justify-content-center">
+                <div class="col-sm-10">
+                    <a role="button" routerLink='/users' class="btn btn-secondary float-left" >Retour</a>
+
+                  <button class="btn btn-success float-right" [disabled]="!editUserBuilder.dirty">
+                      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                      Enregistrer
+                  </button>
+                </div>
+              
+          </div>
+
+           
+        </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-12 col-md-6 mt-4">
+        <div class="card mb-2">
+            <div class="card-body">
+              <h5 class="card-title">Title</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+            </div>
+        </div>
+
+        <div class="card mb-2">
+            <div class="card-body">
+              <h5 class="card-title">Title</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+            </div>
+        </div>
+    </div>
+  </div>

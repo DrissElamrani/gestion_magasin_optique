@@ -1,1 +1,49 @@
-<p>users works!</p>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">
+      Utilisateurs
+    </h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <a class="btn btn-sm btn-primary" routerLink="/users/create" role="button">
+          <i class="fas fa-plus"></i> &nbsp;
+          Nouveau Utilisateur
+        </a>
+      </div>
+  </div>
+  
+  <div class="row">
+       <div class="col-sm-12">
+         
+              <div class="table-responsive ">
+                  <table class="table table-bordered">
+                    <thead class="thead-light">
+                      <tr>
+                        
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prénom</th>
+                        <th>Login</th>
+                        <th scope="col">Password</th>
+                        <th scope="col">Téléphone</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let u of users">
+                          <td>{{u.nom}}</td>
+                          <td>{{u.prenom}}</td>
+                          <td>{{u.login}}</td>
+                          <td>************</td>
+                          <td>{{u.tel}}</td>
+                          <td>
+                            <div class="btn-group btn-group-sm" role="group" >
+                              <button type="button" (click)="editUser(u.idUser)" class="btn btn-secondary"><i class="fas fa-pen"></i> Modifier</button>
+                              <button type="button" (click)="deleteUser(u.idUser)" class="btn btn-danger"><i class="far fa-trash-alt"></i> Supprimer</button>
+                            </div>           
+                          </td>
+                      </tr>
+                    </tbody>
+                  </table>
+              </div>
+           
+       </div>
+  </div>
+  

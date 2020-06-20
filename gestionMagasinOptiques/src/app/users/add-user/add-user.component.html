@@ -1,0 +1,106 @@
+<div class="row justify-content-center">
+    <div class="col-sm-12 mt-4">
+      <div class="card">
+        <div class="card-body">
+          <h6 class="card-title mb-3"> <i class="fas fa-pen-square"></i> &nbsp; Nouveau Utilisateur</h6>
+
+          
+          <form [formGroup]="newUserBuilder" (ngSubmit)="createHandler()">
+            
+              <div class="form-group row justify-content-center">
+                <label class="col-sm-2 col-form-label" for="nom">
+                    Nom
+                </label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="nom" formControlName="nom" [ngClass]="{ 'is-invalid':field('nom').touched && field('nom').invalid}">
+                    <div class="invalid-feedback" *ngIf="field('nom').touched && field('nom').invalid"> Nom est obligatoire</div>
+               </div>
+              </div>
+
+              <div class="form-group row justify-content-center">
+                <label class="col-sm-2 col-form-label" for="prenom">
+                    Prenom
+                </label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="prenom" formControlName="prenom" [ngClass]="{ 'is-invalid':field('prenom').touched && field('prenom').invalid}">
+                    <div class="invalid-feedback" *ngIf="field('prenom').touched && field('prenom').invalid"> Prenom est obligatoire</div>
+               </div>
+              </div>
+
+              <div class="form-group row justify-content-center">
+                <label class="col-sm-2 col-form-label" for="login">
+                    Login
+                </label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="login" formControlName="login" [ngClass]="{ 'is-invalid':field('login').touched && field('login').invalid}">
+                    <div class="invalid-feedback" *ngIf="field('login').touched && field('login').invalid"> Login obligatoire</div>
+               </div>
+              </div>
+
+              <div class="form-group row justify-content-center">
+                <label class="col-sm-2 col-form-label" for="password">
+                    Mot de passe
+                </label>
+                <div class="col-sm-8">
+                    <input type="password" class="form-control" id="password" formControlName="password" [ngClass]="{ 'is-invalid':field('password').touched && field('password').invalid}">
+                    <div class="invalid-feedback" *ngIf="field('password').touched && field('password').invalid">Mot de passe invalid</div>
+                </div>
+               
+              </div>
+
+              <div class="form-group row justify-content-center">
+                <label class="col-sm-2 col-form-label" for="telephone">
+                    Téléphone
+                </label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="telephone" formControlName="telephone" [ngClass]="{ 'is-invalid':field('telephone').touched && field('telephone').invalid}">
+                     <div class="invalid-feedback" *ngIf="field('telephone').touched && field('telephone').invalid">Numéro de téléphone invalid</div>
+                </div>
+               
+              </div>
+
+            
+              <div class="form-group row justify-content-center">
+                <label class="col-sm-2 col-form-label" for="email">
+                    Email
+                </label>
+                <div class="col-sm-8">
+                    <input type="email" class="form-control" id="email" formControlName="email" [ngClass]="{ 'is-invalid':field('email').invalid}">
+                 <div class="invalid-feedback"   *ngIf="field('email').touched && field('email').invalid">Email invalid</div>
+                </div>
+               
+              </div>
+
+              
+
+
+              <div class="form-group row justify-content-center">
+                <label class="col-sm-2 col-form-label" for="addresse">
+                    Adresse
+                </label>
+                <div class="col-sm-8">
+                    <textarea class="form-control" id="addresse" formControlName="addresse" [ngClass]="{ 'is-invalid':field('addresse').invalid}"></textarea>
+                 <div class="invalid-feedback" *ngIf="field('addresse').touched && field('addresse').invalid">Adresse trop longue</div>  
+                </div>
+               
+              </div>
+
+
+              <div class="form-group row justify-content-center">
+                  <div class="col-sm-10">
+                      <a role="button" routerLink='/users' class="btn btn-secondary float-left" >Retour</a>
+
+                    <button class="btn btn-success float-right" [disabled]="newUserBuilder.invalid">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        Créer
+                    </button>
+                  </div>
+                
+            </div>
+
+             
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

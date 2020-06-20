@@ -34,6 +34,8 @@ import { AddClientComponent } from './clients/add-client/add-client.component';
 import { ClientDetailComponent } from './clients/client-detail/client-detail.component';
 import { UsersComponent } from './users/users.component';
 import { ProductsComponent } from './products/products.component';
+import { AddUserComponent } from './users/add-user/add-user.component';
+import { UserDetailComponent } from './users/user-detail/user-detail.component';
 /* */
 //const baseUrl=window["cfgApiBaseUrl"]+"/"
 const appRoutes: Routes = [
@@ -47,6 +49,8 @@ const appRoutes: Routes = [
   { path: 'fournisseurs/create', canActivate: [AuthGuard], component: AddFournisseurComponent},
   { path: 'products', canActivate: [AuthGuard], component: ProductsComponent},
   { path: 'users', canActivate: [AuthGuard], component: UsersComponent},
+  { path: 'users/create', canActivate: [AuthGuard], component: AddUserComponent},
+  { path: 'user/:id', canActivate: [AuthGuard], component: UserDetailComponent},
   { path: 'notfound', component: NotfoundpageComponent },
   { path: '**', redirectTo: 'notfound' }
 ];
@@ -66,7 +70,9 @@ const appRoutes: Routes = [
     AddClientComponent,
     ClientDetailComponent,
     UsersComponent,
-    ProductsComponent
+    ProductsComponent,
+    AddUserComponent,
+    UserDetailComponent
   ],
   imports: [
     BrowserModule,

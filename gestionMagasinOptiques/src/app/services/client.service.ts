@@ -23,7 +23,7 @@ export class ClientService {
         })
     };
 
-    handleError(error: HttpErrorResponse) {
+    /*handleError(error: HttpErrorResponse) {
         let errorMessage = 'Unknown error!';
         if (error.error instanceof ErrorEvent) {
             // Client-side errors
@@ -34,7 +34,7 @@ export class ClientService {
         }
         //       window.alert(errorMessage);
         return throwError(errorMessage);
-    }
+    }*/
 
     getClients(): Observable<any> {
         return this.httpclient.get(`${environment.apiUrl}/clients/list`);
@@ -57,9 +57,9 @@ export class ClientService {
         return this.httpclient.put(`${environment.apiUrl}/clients/${id}/update`, clt,this.httpOptions);
     }
 
-    ajouterJournal(journal = new UserJournals(), idUser: number): Observable<any> {
+    /*ajouterJournal(journal = new UserJournals(), idUser: number): Observable<any> {
         return this.httpclient.post("http://localhost:8090/gestionMagasinOptique/optique/JournalsUser/" + idUser, journal)
             .pipe(catchError(this.handleError));
-    }
+    }*/
 
 }
