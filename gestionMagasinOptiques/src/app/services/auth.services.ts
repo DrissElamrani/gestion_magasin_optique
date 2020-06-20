@@ -25,7 +25,7 @@ export class Authservices {
   };
   
   constructor(private router: Router, private httpclient: HttpClient) {
-      this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+      this.userSubject = new BehaviorSubject<User>(JSON.parse(sessionStorage.getItem('currentUser')));
       this.userLogged = this.userSubject.asObservable();
   }
 
@@ -38,14 +38,14 @@ export class Authservices {
   signIn(login:string,motdepasse:string){
     return this.httpclient.post<any>(`${environment.apiUrl}/user/auth`,{login,motdepasse},this.httpOptions)
      .pipe(map(user=>{
-            localStorage.setItem('currentUser',JSON.stringify(user));
+            sessionStorage.setItem('currentUser',JSON.stringify(user));
             this.userSubject.next(user);
             return user;
      }));
   }
 
   signOut() {
-    localStorage.removeItem('currentUser');
+    sessionStorage.removeItem('currentUser');
     this.userSubject.next(null);
   }
 
