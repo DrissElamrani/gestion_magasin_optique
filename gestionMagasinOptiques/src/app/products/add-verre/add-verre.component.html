@@ -1,0 +1,107 @@
+<div class="row justify-content-center">
+    <div class="col-sm-12 mt-4">
+      <div class="card">
+        <div class="card-body">
+          <h6 class="card-title mb-3"> <i class="fas fa-pen-square"></i> &nbsp; Nouveau verre</h6>
+
+          
+          <form [formGroup]="verreBuilder" (ngSubmit)="createHandler()">
+            <p><strong>Basic</strong></p>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label  for="nomProd">Libelle</label>
+                  <input type="text" class="form-control" id="nomProd" formControlName="nomProd" [ngClass]="{ 'is-invalid':field('nomProd').touched && field('nomProd').invalid}">
+                    <div class="invalid-feedback" *ngIf="field('nomProd').touched && field('nomProd').invalid"> Nom est obligatoire</div>
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="qteProd">
+                    Quantité</label>
+                  <input type="number" step="1" class="form-control" id="qteProd" formControlName="qteProd" [ngClass]="{ 'is-invalid':field('qteProd').touched && field('qteProd').invalid}">
+                  <div class="invalid-feedback" *ngIf="field('qteProd').touched && field('qteProd').invalid"> Quantité est obligatoire</div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="prixUnitaire">
+                        Prix unitaire
+                    </label>
+                      <input type="number" step="0.5" class="form-control" id="prixUnitaire" formControlName="prixUnitaire" [ngClass]="{ 'is-invalid':field('prixUnitaire').touched && field('prixUnitaire').invalid}">
+                      <div class="invalid-feedback" *ngIf="field('prixUnitaire').touched && field('prixUnitaire').invalid"> Prix unitaire obligatoire</div>
+                  </div>
+              </div>
+
+              <p><strong>Détails</strong></p>
+
+              <div class="form-row">
+                <div class="form-group col-md-3">
+                  <label for="sph">SPH</label>
+                  <input type="number" step="0.1" class="form-control" id="sph" formControlName="sph" [ngClass]="{ 'is-invalid':field('sph').touched && field('sph').invalid}">
+                  <div class="invalid-feedback" *ngIf="field('sph').touched && field('sph').invalid"> SPH obligatoire</div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="cyl">CYL</label>
+                    <input type="number" step="0.1" class="form-control" id="cyl" formControlName="cyl" [ngClass]="{ 'is-invalid':field('cyl').touched && field('cyl').invalid}">
+                    <div class="invalid-feedback" *ngIf="field('cyl').touched && field('cyl').invalid"> CYL obligatoire</div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="axe">AXE</label>
+                    <input type="number" step="0.1" class="form-control" id="axe" formControlName="axe" [ngClass]="{ 'is-invalid':field('axe').touched && field('axe').invalid}">
+                    <div class="invalid-feedback" *ngIf="field('axe').touched && field('axe').invalid"> Axe obligatoire</div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="addV">AddV</label>
+                    <input type="number" step="0.1" class="form-control" id="addV" formControlName="addV" [ngClass]="{ 'is-invalid':field('addV').touched && field('addV').invalid}">
+                    <div class="invalid-feedback" *ngIf="field('addV').touched && field('addV').invalid"> AddV obligatoire</div>
+                </div>
+              </div>
+
+              
+              <p><strong>Vision</strong></p>
+
+              <div class="form-row">
+                <div class="form-group col-md-3">
+                  <label for="visionPres">Vision près</label>
+                  <input type="number" step="0.1" class="form-control" id="visionPres" formControlName="visionPres" [ngClass]="{ 'is-invalid':field('visionPres').touched && field('visionPres').invalid}">
+                  <div class="invalid-feedback" *ngIf="field('visionPres').touched && field('visionPres').invalid"> vision près obligatoire</div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="visionLoin">Vision loin</label>
+                    <input type="number" step="0.1" class="form-control" id="visionLoin" formControlName="visionLoin" [ngClass]="{ 'is-invalid':field('visionLoin').touched && field('visionLoin').invalid}">
+                    <div class="invalid-feedback" *ngIf="field('visionLoin').touched && field('visionLoin').invalid"> vision loin obligatoire</div>
+                </div>
+                
+              </div>
+
+              <p><strong>Autre</strong></p>
+
+              <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label for="nature">Nature</label>
+                  <input type="text" step="0.5" class="form-control" id="nature" formControlName="nature" [ngClass]="{ 'is-invalid':field('nature').touched && field('nature').invalid}">
+                  <div class="invalid-feedback" *ngIf="field('nature').touched && field('nature').invalid"> nature obligatoire</div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="oeilGaucheDroit">Oeil Gauche - Droit obligatoire</label>
+                    <input type="text" step="0.5" class="form-control" id="oeilGaucheDroit" formControlName="oeilGaucheDroit" [ngClass]="{ 'is-invalid':field('oeilGaucheDroit').touched && field('oeilGaucheDroit').invalid}">
+                    <div class="invalid-feedback" *ngIf="field('oeilGaucheDroit').touched && field('oeilGaucheDroit').invalid"> Oeil Gauche - Droit obligatoire</div>
+                </div>
+                
+              </div>
+            
+
+              <div class="form-group row ">
+                  <div class="col-sm-12">
+                      <a role="button" routerLink='/products' class="btn btn-secondary float-left" >Retour</a>
+
+                    <button class="btn btn-success float-right" [disabled]="verreBuilder.invalid">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        Créer
+                    </button>
+                  </div>
+                
+            </div>
+
+             
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

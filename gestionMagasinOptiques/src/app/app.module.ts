@@ -36,6 +36,11 @@ import { UsersComponent } from './users/users.component';
 import { ProductsComponent } from './products/products.component';
 import { AddUserComponent } from './users/add-user/add-user.component';
 import { UserDetailComponent } from './users/user-detail/user-detail.component';
+import { InvoicesComponent } from './sales/invoices/invoices.component';
+import { NewInvoiceComponent } from './sales/invoices/new-invoice/new-invoice.component';
+import { AddMontureComponent } from './products/add-monture/add-monture.component';
+import { AddLunetteSolaireComponent } from './products/add-lunette-solaire/add-lunette-solaire.component';
+import { AddVerreComponent } from './products/add-verre/add-verre.component';
 /* */
 //const baseUrl=window["cfgApiBaseUrl"]+"/"
 const appRoutes: Routes = [
@@ -52,6 +57,11 @@ const appRoutes: Routes = [
   { path: 'users/create', canActivate: [AuthGuard], component: AddUserComponent},
   { path: 'user/:id', canActivate: [AuthGuard], component: UserDetailComponent},
   { path: 'notfound', component: NotfoundpageComponent },
+  { path: 'factures', canActivate: [AuthGuard], component: InvoicesComponent},
+  { path: 'factures/create', canActivate: [AuthGuard], component: NewInvoiceComponent},
+  { path: 'monture/create', canActivate: [AuthGuard], component: AddMontureComponent},
+  { path: 'lunette/solaire/create', canActivate: [AuthGuard], component: AddLunetteSolaireComponent},
+  { path: 'verre/create', canActivate: [AuthGuard], component: AddVerreComponent},
   { path: '**', redirectTo: 'notfound' }
 ];
 
@@ -72,7 +82,12 @@ const appRoutes: Routes = [
     UsersComponent,
     ProductsComponent,
     AddUserComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    InvoicesComponent,
+    NewInvoiceComponent,
+    AddMontureComponent,
+    AddLunetteSolaireComponent,
+    AddVerreComponent
   ],
   imports: [
     BrowserModule,
